@@ -88,4 +88,9 @@ public class UserImpl implements UserService{
     public List<User> getUsersByIds(List<Long> userid) {
         return userRepo.findByUseridIn(userid);
     }
+
+    @Override
+    public boolean checkEmailExists(String email) {
+        return userRepo.existsByEmail(email); // 檢查電子郵件是否已存在
+    }
 }

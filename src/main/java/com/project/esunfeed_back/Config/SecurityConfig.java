@@ -45,9 +45,7 @@ public class SecurityConfig {
                                     "unsafe-none"); // 根據需求調整或禁用
                         }))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/public/**", "/api/v1/guest/**",
-                                "/api/v1/user/websocketcon", "/oauth2/**",
-                                "/login", "/ws/**")
+                        .requestMatchers("/public/**", "/api/v1/guest/**","/login")
                         .permitAll() // 允許公開訪問的路徑
                         .requestMatchers("/api/v1/user/**").hasRole("USER") // 需要 USER 角色的路徑
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN") // 需要 ADMIN 角色的路徑
@@ -88,7 +86,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // 允許所有來源
+        configuration.setAllowedOrigins(List.of("http://localhost:5173")); // 允許所有來源
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 允許的方法
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // 允許的標頭
         configuration.setAllowCredentials(true); // 不允許憑證

@@ -35,12 +35,15 @@ public class Post {
     @Column(name="createdAt")
     private LocalDateTime createdAt;
 
-    public Post( User user, String userId, String content, String image, LocalDateTime createdAt) {
-        this.user = user;
+    @Column(name="isDeleted")
+    private boolean isDeleted = false;
+
+    public Post(String userId, String content, String image, LocalDateTime createdAt, boolean isDeleted) {
         this.userId = userId;
         this.content = content;
         this.image = image;
         this.createdAt = createdAt;
+        this.isDeleted = isDeleted;
     }
 
     public Post() {}
@@ -93,9 +96,17 @@ public class Post {
         this.createdAt = createdAt;
     }
 
+    public boolean isDeleted() {        
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     @Override
     public String toString() {
-        return "Post{" +"postId=" + postId +", user=" + user +", userId='" + userId +", content='" + content +", image='" + image +", createdAt=" + createdAt +'}';
+        return "Post{" +"postId=" + postId +", user=" + user +", userId='" + userId +", content='" + content +", image='" + image +", createdAt=" + createdAt + ", isDeleted=" + isDeleted + '}';
     }
 
 }

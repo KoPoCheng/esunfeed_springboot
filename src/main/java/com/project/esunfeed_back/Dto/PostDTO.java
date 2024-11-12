@@ -8,13 +8,15 @@ public class PostDTO {
     private String content;
     private String image;
     private LocalDateTime createdAt;
+    private boolean isDeleted = false;
 
-    public PostDTO(Long postId, String userId, String content, String image, LocalDateTime createdAt) {
+    public PostDTO(Long postId, String userId, String content, String image, LocalDateTime createdAt, boolean isDeleted) {
         this.postId = postId;
         this.userId = userId;
         this.content = content;
         this.image = image;
         this.createdAt = createdAt;
+        this.isDeleted = isDeleted;
     }
 
     public PostDTO() {
@@ -59,8 +61,17 @@ public class PostDTO {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+    
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     @Override
     public String toString() {
-        return "PostDTO{" +"postId=" + postId +", userId='" + userId +", content='" + content +", image='" + image +", createdAt='" + createdAt +'}';
+        return "PostDTO{" +"postId=" + postId +", userId='" + userId +", content='" + content +", image='" + image +", createdAt='" + createdAt + ", isDeleted=" + isDeleted + '}';
     }
 }

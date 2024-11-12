@@ -13,5 +13,7 @@ public interface UserService {
 
     List<User> getUsersByIds(List<Long> userid);
 
+    boolean checkEmailExists(String email);
+
     void registerUser(RegistrationDTO registrationDTO) throws Exception;
 }
