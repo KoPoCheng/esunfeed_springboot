@@ -6,9 +6,9 @@ import com.project.esunfeed_back.Dto.CommentDTO;
 
 public interface CommentService {
 
-    CommentDTO createMessage(CommentDTO messageDTO);
+    CommentDTO createComment(CommentDTO messageDTO);
 
-    List<CommentDTO> getMessagesByPostId(Long postId);
+    List<CommentDTO> getCommentByPostId(Long postId);
 
     //Page<MessageDTO> getAllMessages(Pageable pageable);
 } 

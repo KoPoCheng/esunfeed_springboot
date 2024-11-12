@@ -17,7 +17,7 @@ public class Post {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
@@ -49,11 +49,11 @@ public class Post {
     public Post() {}
 
     public Long getPostId() {
-        return postId;
+        return id;
     }
 
     public void setPostId(Long postId) {
-        this.postId = postId;
+        this.id = postId;
     }
 
     public User getUser() {
@@ -106,7 +106,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" +"postId=" + postId +", user=" + user +", userId='" + userId +", content='" + content +", image='" + image +", createdAt=" + createdAt + ", isDeleted=" + isDeleted + '}';
+        return "Post{" +"postId=" + id +", user=" + user +", userId='" + userId +", content='" + content +", image='" + image +", createdAt=" + createdAt + ", isDeleted=" + isDeleted + '}';
     }
 
 }

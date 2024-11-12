@@ -30,7 +30,7 @@ public class CommentImpl implements CommentService {
     private PostRepo postRepo;
 
     @Override
-    public CommentDTO createMessage(CommentDTO commentDTO) {
+    public CommentDTO createComment(CommentDTO commentDTO) {
         // 獲取用戶和帖子
         User user = userRepo.findById(commentDTO.getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + commentDTO.getUserId()));
@@ -57,8 +57,8 @@ public class CommentImpl implements CommentService {
     }
     
     @Override
-    public List<CommentDTO> getMessagesByPostId(Long postId) {
-        List<Comment> comments = commentRepo.findByPostIdAndIsdeletedFalse(postId);
+    public List<CommentDTO> getCommentByPostId(Long postId) {
+        List<Comment> comments = commentRepo.findByPostId(postId);
         return comments.stream()
                 .map(comment -> new CommentDTO(
                         comment.getCommentId(),

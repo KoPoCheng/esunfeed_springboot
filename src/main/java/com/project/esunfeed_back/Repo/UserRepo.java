@@ -12,9 +12,9 @@ import com.project.esunfeed_back.Entity.User;
 @Repository
 public interface UserRepo extends JpaRepository<User, String> {
     
-    Optional<User> findByEmail(String email);
+    Optional<User> findByUserEmail(String email);
 
-    boolean existsByEmail(String email);
+    boolean existsByUserEmail(String email);
 
-    List<User> findByUseridIn(List<Long> userid);
+    List<User> findByUserIdIn(List<Long> userid);
 }

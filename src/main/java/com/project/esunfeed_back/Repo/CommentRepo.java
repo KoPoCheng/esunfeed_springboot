@@ -8,12 +8,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.project.esunfeed_back.Entity.Comment;
 
 public interface CommentRepo extends JpaRepository<Comment, Long> {
+    
     List<Comment> findByPostId(Long postId);
 
-    Optional<Comment> findByMessageId(Long messageId);
+    Optional<Comment> findByCommentId(Long commentId);
 
-    List<Comment> findByPostIdAndIsdeletedFalse(Long postId);
+    //List<Comment> findByPost_IdAndIsdeletedFalse(Long postId);
 
     // List<Message> findByUserid(Long userid);
-    Optional<Comment> findById(Long messageId);
+    //Optional<Comment> findById(Long commetId);
 }

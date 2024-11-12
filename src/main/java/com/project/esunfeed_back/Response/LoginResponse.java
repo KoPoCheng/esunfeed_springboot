@@ -3,12 +3,13 @@ package com.project.esunfeed_back.Response;
 import com.project.esunfeed_back.Dto.UserResponseWebDTO;
 
 public class LoginResponse {
-    
+
     private String message;
     private Boolean status;
     private UserResponseWebDTO user;
     private String token;
 
+    // Constructors
     public LoginResponse(String message, Boolean status, UserResponseWebDTO user, String token) {
         this.message = message;
         this.status = status;
@@ -30,6 +31,7 @@ public class LoginResponse {
     public LoginResponse() {
     }
 
+    // Getters and Setters
     public String getMessage() {
         return message;
     }
@@ -64,8 +66,6 @@ public class LoginResponse {
 
     @Override
     public String toString() {
-        return "LoginResponse{" +"message='" + message +", status=" + status +", user=" + user +", token='" + token  +'}';
+        return "LoginResponse [message=" + message + ", status=" + status + ", user=" + user + ", token=" + token + "]";
     }
-    
-
 }

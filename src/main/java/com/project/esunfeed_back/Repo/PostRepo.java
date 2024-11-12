@@ -10,5 +10,5 @@ import com.project.esunfeed_back.Entity.Post;
 @Repository
 public interface PostRepo extends JpaRepository<Post, Long> {
 
-    List<Post> findByUserIdAndIsdeletedFalse(Long userId);
+    List<Post> findByUserIdAndIsDeletedFalse(String userId);
 }

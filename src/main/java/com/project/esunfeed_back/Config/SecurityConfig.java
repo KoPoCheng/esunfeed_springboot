@@ -2,6 +2,7 @@ package com.project.esunfeed_back.Config;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -30,6 +31,9 @@ public class SecurityConfig {
     private final JwtService jwtService;
     private final CustomUserDetailsService userDetailsService;
 
+    @Autowired
+    //CustomOAuth2UserService customOAuth2UserService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -45,12 +49,40 @@ public class SecurityConfig {
                                     "unsafe-none"); // 根據需求調整或禁用
                         }))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/public/**", "/api/v1/guest/**","/login")
+                        .requestMatchers("/public/**", "/api/v1/guest/**",
+                                "/api/v1/user/websocketcon", "/oauth2/**",
+                                "/login", "/ws/**")
                         .permitAll() // 允許公開訪問的路徑
                         .requestMatchers("/api/v1/user/**").hasRole("USER") // 需要 USER 角色的路徑
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN") // 需要 ADMIN 角色的路徑
                         .anyRequest().authenticated() // 其他請求需要認證
                 )
+                /* .oauth2Login(oauth2 -> oauth2
+                        .userInfoEndpoint(userinfo -> userinfo
+                                .userService(customOAuth2UserService) // 使用自訂的 OAuth2
+                                                                      // 使用者服務
+                        )
+                        .successHandler((request, response, authentication) -> {
+                            OAuth2User oAuth2User = (OAuth2User) authentication
+                                    .getPrincipal();
+                            String email = oAuth2User.getAttribute("email"); // 獲取用戶的電子郵件
+                            String name = oAuth2User.getAttribute("name"); // 獲取用戶的名稱
+
+                            List<String> roles = oAuth2User.getAuthorities().stream()
+                                    .map(GrantedAuthority::getAuthority)
+                                    .map(role -> role.replace("ROLE_", ""))
+                                    .collect(Collectors.toList());
+
+                            String token = jwtService.generateToken(email, roles); // 生成 JWT
+                                                                                   // token
+
+                            // 以 JSON 格式寫入 token、角色和名稱到回應
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"token\": \"" + token
+                                    + "\", \"roles\": "
+                                    + new ObjectMapper().writeValueAsString(roles)
+                                    + ", \"name\": \"" + name + "\"}");
+                        }))*/
                 .sessionManagement(
                         sessionManagement -> sessionManagement
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 設定無狀態會話
@@ -86,7 +118,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173")); // 允許所有來源
+        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // 允許所有來源
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 允許的方法
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // 允許的標頭
         configuration.setAllowCredentials(true); // 不允許憑證

@@ -9,7 +9,7 @@ public interface PostService {
 
     Post savePost(PostDTO postDTO);
 
-    List<Post> getPostsForUser(Long userid);
+    List<Post> getPostsForUser(String userid);
 
     void markPostAsDeleted(Long id);
 

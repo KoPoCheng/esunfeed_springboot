@@ -35,7 +35,7 @@ public class UserImpl implements UserService{
      @Transactional
     public void registerUser(RegistrationDTO registrationDTO) throws Exception {
         // 檢查電子郵件是否已存在
-        if (userRepo.existsByEmail(registrationDTO.getUserEmail())) {
+        if (userRepo.existsByUserEmail(registrationDTO.getUserEmail())) {
             throw new Exception("電子郵件已被註冊");
         }
 
@@ -52,7 +52,7 @@ public class UserImpl implements UserService{
 
     @Override
     public LoginResponse loginUser(LoginDTO loginDTO) {
-        Optional<User> optionalUser = userRepo.findByEmail(loginDTO.getUserEmail());
+        Optional<User> optionalUser = userRepo.findByUserEmail(loginDTO.getUserEmail());
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
@@ -86,11 +86,11 @@ public class UserImpl implements UserService{
 
     @Override
     public List<User> getUsersByIds(List<Long> userid) {
-        return userRepo.findByUseridIn(userid);
+        return userRepo.findByUserIdIn(userid);
     }
 
     @Override
     public boolean checkEmailExists(String email) {
-        return userRepo.existsByEmail(email); // 檢查電子郵件是否已存在
+        return userRepo.existsByUserEmail(email); // 檢查電子郵件是否已存在
     }
 }

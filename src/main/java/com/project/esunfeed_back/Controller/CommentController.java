@@ -29,13 +29,13 @@ public class CommentController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        CommentDTO createdComment = commentService.createMessage(commentDTO);
+        CommentDTO createdComment = commentService.createComment(commentDTO);
         return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
     }
 
     @GetMapping("/post/{postId}")
     public ResponseEntity<List<CommentDTO>> getMessagesByPostId(@PathVariable Long postId) {
-        List<CommentDTO> comments = commentService.getMessagesByPostId(postId);
+        List<CommentDTO> comments = commentService.getCommentByPostId(postId);
         // 直接返回留言列表，即使是空的
         return new ResponseEntity<>(comments, HttpStatus.OK);
     }

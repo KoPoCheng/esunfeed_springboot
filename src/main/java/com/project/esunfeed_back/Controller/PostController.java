@@ -46,7 +46,7 @@ public class PostController {
 
     @GetMapping("/getuserpost/{userid}")
     public ResponseEntity<List<Post>> getPostsForUser(
-            @PathVariable Long userid,
+            @PathVariable String userid,
             @RequestParam(defaultValue = "0") int page, // 當前頁數
             @RequestParam(defaultValue = "5") int size) { // 每頁文章數量
 

@@ -41,9 +41,9 @@ public class PostImpl implements PostService {
 
 
     @Override
-    public List<Post> getPostsForUser(Long userid) {
+    public List<Post> getPostsForUser(String userid) {
         
-        return postRepo.findByUserIdAndIsdeletedFalse(userid);
+        return postRepo.findByUserIdAndIsDeletedFalse(userid);
     }
 
     @Override
