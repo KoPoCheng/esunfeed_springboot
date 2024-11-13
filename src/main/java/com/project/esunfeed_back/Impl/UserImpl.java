@@ -68,7 +68,7 @@ public class UserImpl implements UserService{
                 String token = jwtService.generateToken(claims, user);
 
                 UserResponseWebDTO userResponseWebDTO = new UserResponseWebDTO(
-                        null,
+                        user.getUserId(),
                         user.getUserName(),
                         user.getUserEmail(),
                         user.getUserProfilepic(),

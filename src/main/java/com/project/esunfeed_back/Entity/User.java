@@ -13,8 +13,7 @@ import jakarta.persistence.UniqueConstraint;
 public class User {
     @Id
     @Column(name="userId",length=45)
-    private String userId="User"+UUID.randomUUID().toString();
-;
+    private String userId="User"+UUID.randomUUID().toString().substring(0,8);
 
     @Column(name="userName",length=255)
     private String userName;

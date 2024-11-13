@@ -118,7 +118,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // 允許所有來源
+        configuration.setAllowedOrigins(List.of("http://localhost:5173")); // 允許所有來源
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 允許的方法
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // 允許的標頭
         configuration.setAllowCredentials(true); // 不允許憑證
