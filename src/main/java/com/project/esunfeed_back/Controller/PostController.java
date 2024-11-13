@@ -31,8 +31,7 @@ public class PostController {
         try {
             // 如果有圖片，保存 Base64 編碼的圖片數據
             if (postDTO.getImage() != null && !postDTO.getImage().isEmpty()) {
-                // 可以在此處處理圖片數據（例如解碼或保存為文件）
-                // 本例中假設直接保存 Base64 字符串
+                
             }
 
             Post createdPost = postService.savePost(postDTO);

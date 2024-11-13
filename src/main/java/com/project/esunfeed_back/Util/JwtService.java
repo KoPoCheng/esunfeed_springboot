@@ -8,6 +8,7 @@ import com.project.esunfeed_back.Entity.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import javax.annotation.PostConstruct;
@@ -118,11 +119,17 @@ public class JwtService {
     }
 
     private Claims getAllClaimsFromToken(String token) {
+        try {
         return Jwts.parserBuilder()
-                .setSigningKey(secretKey)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+            .setSigningKey(secretKey) // Ensure this is your correct secret key
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
+    } catch (MalformedJwtException e) {
+        System.err.println("Malformed JWT token: " + token);
+        // Optionally, log or throw a custom exception
+        throw new IllegalArgumentException("Invalid JWT token", e);
+    }
     }
 
     private Key getSignInKey() {

@@ -34,7 +34,7 @@ public class CommentController {
     }
 
     @GetMapping("/post/{postId}")
-    public ResponseEntity<List<CommentDTO>> getMessagesByPostId(@PathVariable Long postId) {
+    public ResponseEntity<List<CommentDTO>> getCommentsByPostId(@PathVariable Long postId) {
         List<CommentDTO> comments = commentService.getCommentByPostId(postId);
         // 直接返回留言列表，即使是空的
         return new ResponseEntity<>(comments, HttpStatus.OK);
